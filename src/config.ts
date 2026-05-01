@@ -112,7 +112,7 @@ export const siteConfig = {
   experience: [
     {
       company: "TechTorch",
-      title: "Data Engineer Intern",
+      title: "Data Intern",
       dateRange: "June 2025 – August 2025",
       bullets: [
         "Architected scalable CRM data pipelines processing 1M+ records with strict data quality controls.",
@@ -124,7 +124,7 @@ export const siteConfig = {
     },
     {
       company: "Apexon – Healthcare Project",
-      title: "Data Analyst Trainee",
+      title: "Data Engineer Intern",
       dateRange: "May 2024 – July 2024",
       bullets: [
         "Engineered distributed ETL pipelines (PySpark, Delta) to process high-volume EHR and ICU datasets.",
@@ -136,7 +136,7 @@ export const siteConfig = {
     },
     {
       company: "DBQ Technologies (Client: Bankhaus Scheich)",
-      title: "Data Analyst Intern",
+      title: "Data Engineer Intern",
       dateRange: "Sept 2023 – March 2024",
       bullets: [
         "Developed automated ingestion pipelines integrating multi-source financial trading data.",
