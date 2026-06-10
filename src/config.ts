@@ -10,8 +10,7 @@ export const siteConfig = {
     twitter: "",
     github: "https://github.com/MIHIRY",
   },
-  aboutMe:
-    "I'm a Data Science graduate student at Stony Brook University focused on building scalable, intelligent systems that transform data into real-world impact. My experience spans machine learnin[...]
+  aboutMe: "I am a data analyst with experience in Python, SQL, Power BI, dashboard development, data cleaning, reporting automation, and business process improvement.",
   skills: [
     "Python",
     "SQL",
@@ -111,7 +110,7 @@ export const siteConfig = {
     {
       name: "LendingClub Credit Risk Analytics",
       description:
-        "End-to-end credit risk pipeline on 837K LendingClub loans with calibrated XGBoost model (ROC-AUC 0.688). Implements cost-based approval policy saving $9.6M vs baseline with interactive Streamlit dashboard.",
+        "End-to-end credit risk pipeline on 837K LendingClub loans with calibrated XGBoost model (ROC-AUC 0.688). Implements cost-based approval policy saving $9.6M vs baseline with interactive S[...]
       link: "https://github.com/MIHIRY/lendingclub-credit-risk-analytics",
       skills: ["Python", "XGBoost", "Streamlit", "Machine Learning", "Risk Modeling", "Jupyter"],
     },
@@ -191,7 +190,7 @@ export const siteConfig = {
       ],
     },
     {
-      school: "Gandhi Institute of Technology and Management (GITAM) — Visakhapatnam, India",
+      school: "Gandhi Institute of Technology and Management (GITAM) — Visakhaputnam, India",
       degree: "Bachelor of Technology in Computer Science and Engineering",
       dateRange: "Jun 2019 – Jul 2023",
       achievements: [
