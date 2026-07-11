@@ -10,7 +10,7 @@ export const siteConfig = {
     twitter: "",
     github: "https://github.com/MIHIRY",
   },
-  aboutMe: "I am a data analyst with experience in Python, SQL, Power BI, dashboard development, data cleaning, reporting automation, and business process improvement.",
+  aboutMe: "Data Engineer with 3+ years building scalable data platforms in Python, SQL, PySpark, AWS, Databricks, Snowflake, and dbt. I design ETL/ELT pipelines and dimensional models that handle 30M+ record datasets. Track record: 40% performance improvements, 90% API cost reduction, and metrics layers that enable self-service analytics. Currently learning Microsoft Fabric for lakehouse solutions.",
   skills: [
     "Python",
     "SQL",
