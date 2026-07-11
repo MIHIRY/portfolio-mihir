@@ -144,7 +144,7 @@ export const siteConfig = {
     },
     {
       company: "Apexon – Healthcare Project",
-      title: "Data Engineer Intern",
+      title: "Data Engineer",
       dateRange: "May 2024 – July 2024",
       bullets: [
         "Engineered distributed ETL pipelines (PySpark, Delta) to process high-volume EHR and ICU datasets.",
@@ -156,7 +156,7 @@ export const siteConfig = {
     },
     {
       company: "DBQ Technologies (Client: Bankhaus Scheich)",
-      title: "Data Engineer Intern",
+      title: "Data Engineer",
       dateRange: "Sept 2023 – March 2024",
       bullets: [
         "Developed automated ingestion pipelines integrating multi-source financial trading data.",
