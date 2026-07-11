@@ -129,6 +129,13 @@ export const siteConfig = {
       link: "https://github.com/MIHIRY/-pc-sku-demand-forecasting",
       skills: ["Python", "Machine Learning", "Forecasting", "Time Series", "Jupyter"],
     },
+    {
+      name: "Drive Telemetry Lakehouse",
+      description:
+        "End-to-end data engineering platform turning Backblaze hard-drive SMART data into live failure analytics. Daily telemetry replayed as Avro/Kafka events, streamed by Spark into Bronze Iceberg tables, refined to Silver, modeled into six Gold marts with dbt-trino. Airflow orchestrates medallion flow, Great Expectations gates quality, Trino serves lakehouse via shared REST catalog, Streamlit dashboard visualizes fleet reliability. Fully containerized; 500,582 events processed with 0 duplicates, 11/11 quality checks passing.",
+      link: "https://github.com/MIHIRY/Drive-Telemetry-Lakehouse",
+      skills: ["PySpark", "Apache Iceberg", "Kafka", "dbt", "Trino", "Airflow", "Great Expectations", "Streamlit", "Docker", "PostgreSQL"],
+    },
   ],
   experience: [
     {
