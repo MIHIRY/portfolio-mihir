@@ -117,7 +117,8 @@ export const siteConfig = {
     {
       name: "FinanceIQ: AI-First Finance Analytics Platform",
       description:
-        "AI-powered finance analytics platform designed for intelligent financial data processing, analysis, and insights generation using advanced LLM-based agents.",
+        "AI-first finance analytics on Snowflake over real SEC EDGAR filings for 24 public SaaS companies — dbt-modeled, deterministic AI agent, Streamlit UI, CI.",
+
       link: "https://github.com/MIHIRY/FinanceIQ-AgentOS",
       skills: ["Python", "LLM", "AI Agents", "Finance", "Data Analytics"],
     },
