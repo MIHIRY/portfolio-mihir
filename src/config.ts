@@ -140,7 +140,7 @@ export const siteConfig = {
       name: "VEHICLE-TELEMETRY-PIPELINE",
       description:
         "A production-style vehicle telemetry ELT pipeline that ingests, validates, quarantines, and transforms connected-car event data into analytics-ready marts for fleet monitoring and insight.",
-      link: "#",
+      link: "https://github.com/MIHIRY/-VEHICLE-TELEMETRY-PIPELINE",
       skills: ["Python", "SQL", "dbt", "Airflow", "Snowflake", "DuckDB", "Docker", "ETL/ELT", "Data Quality", "Parquet"],
     },
   ],
