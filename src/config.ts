@@ -136,6 +136,13 @@ export const siteConfig = {
       link: "https://github.com/MIHIRY/Drive-Telemetry-Lakehouse",
       skills: ["PySpark", "Apache Iceberg", "Kafka", "dbt", "Trino", "Airflow", "Great Expectations", "Streamlit", "Docker", "PostgreSQL"],
     },
+    {
+      name: "VEHICLE-TELEMETRY-PIPELINE",
+      description:
+        "A production-style vehicle telemetry ELT pipeline that ingests, validates, quarantines, and transforms connected-car event data into analytics-ready marts for fleet monitoring and insight.",
+      link: "#",
+      skills: ["Python", "SQL", "dbt", "Airflow", "Snowflake", "DuckDB", "Docker", "ETL/ELT", "Data Quality", "Parquet"],
+    },
   ],
   experience: [
     {
