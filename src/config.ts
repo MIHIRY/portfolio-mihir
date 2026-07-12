@@ -44,77 +44,21 @@ export const siteConfig = {
     "GitHub",
   ],
   projects: [
-    {
-      name: "RideOps AI",
+{
+      name: "Drive Telemetry Lakehouse",
       description:
-        "NYC Taxi Demand Intelligence Platform — forecasts Yellow Taxi demand at zone and hourly level using 85.6M trip records. Features anomaly detection, congestion pricing impact analysis, and AI-powered demand insights.",
-      link: "https://github.com/MIHIRY/Rideops-AI",
-      skills: ["Python", "DuckDB", "dbt", "XGBoost", "Streamlit", "Claude API"],
+        "End-to-end data engineering platform turning Backblaze hard-drive SMART data into live failure analytics. Daily telemetry replayed as Avro/Kafka events, streamed by Spark into Bronze Iceberg tables, refined to Silver, modeled into six Gold marts with dbt-trino. Airflow orchestrates medallion flow, Great Expectations gates quality, Trino serves lakehouse via shared REST catalog, Streamlit dashboard visualizes fleet reliability. Fully containerized; 500,582 events processed with 0 duplicates, 11/11 quality checks passing.",
+      link: "https://github.com/MIHIRY/Drive-Telemetry-Lakehouse",
+      skills: ["PySpark", "Apache Iceberg", "Kafka", "dbt", "Trino", "Airflow", "Great Expectations", "Streamlit", "Docker", "PostgreSQL"],
     },
-    {
-      name: "Adaptive Query Ranker – SQL Performance Optimization",
+{
+      name: "VEHICLE-TELEMETRY-PIPELINE",
       description:
-        "Tree-aware transformer model that ranks database query execution plans to predict which plan executes faster. Uses LoRA for parameter-efficient fine-tuning on 35K+ query plan variants across 134 schemas.",
-      link: "https://github.com/MIHIRY/Cross-Plan",
-      skills: ["Python", "PyTorch", "Transformers", "LoRA", "SQL"],
+        "A production-style vehicle telemetry ELT pipeline that ingests, validates, quarantines, and transforms connected-car event data into analytics-ready marts for fleet monitoring and insight.",
+      link: "https://github.com/MIHIRY/-VEHICLE-TELEMETRY-PIPELINE",
+      skills: ["Python", "SQL", "dbt", "Airflow", "Snowflake", "DuckDB", "Docker", "ETL/ELT", "Data Quality", "Parquet"],
     },
-    {
-      name: "RAGFlow: Enhancing Research Paper Comprehension",
-      description:
-        "Advanced RAG system for research paper comprehension using vector embeddings and semantic search to enable intelligent querying and summarization of academic papers.",
-      link: "#",
-      skills: ["Python", "LLM", "RAG"],
-    },
-    {
-      name: "ContextType: Adaptive Keyboard System",
-      description:
-        "Intelligent keyboard interface that provides context-aware text suggestions using LLM technology. Detects writing context (programming, email, chat) and delivers real-time next-word predictions.",
-      link: "https://github.com/MIHIRY/HCI-",
-      skills: ["React", "TypeScript", "Node.js", "Express.js", "Groq API", "Tailwind CSS"],
-    },
-    {
-      name: "Large-Scale Frequent Itemsets",
-      description:
-        "Parallel association rule mining using Apriori, PCY, and SON algorithms with MPI across 10 processes on HPC clusters. Discovers frequently co-purchased product patterns in grocery transactions.",
-      link: "https://github.com/MIHIRY/Large-Scale-Frequent-Items",
-      skills: ["Python", "MPI", "HPC", "Apriori", "Data Mining"],
-    },
-    {
-      name: "Terrorism Risk Forecasting",
-      description:
-        "Analyzed global terrorism incidents from 1970–2017 using the Global Terrorism Database. Built predictive models with ANOVA, logistic regression, random forest, and time series forecasting.",
-      link: "https://github.com/MIHIRY/Terrorism-Risk-Forecasting-using-R",
-      skills: ["R", "Statistical Modeling", "Time Series", "Random Forest", "PCA"],
-    },
-    {
-      name: "Hate Speech Detection Using Different Models",
-      description:
-        "Hate speech detection system using a dataset of over 10,000 entries. Implemented and compared multiple models, including Logistic Regression, SVM, Random Forest, and BERT.",
-      link: "https://github.com/MIHIRY/Hate-Speech-Recognition",
-      skills: ["Python", "NLTK", "Pandas", "Machine Learning", "Deep Learning"],
-    },
-    {
-      name: "Neural Networks for POS Tagging & Bigram Language Modeling",
-      description:
-        "Implements neural networks for Part-of-Speech (POS) tagging and Bigram Language Models to enhance NLP tasks. Explores feature engineering, pretrained embeddings, and deep learning architectures.",
-      link: "https://github.com/MIHIRY/Neural-Networks-for-POS-Tagging-Bigram-Language-Modeling/tree/Publication-Certificate",
-      skills: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
-    },
-    {
-      name: "Word Embeddings Analysis",
-      description:
-        "This project uses statistical methods such as co-occurrence counting, TF-IDF, and PMI to explore various distributional semantics techniques for analyzing word representations.",
-      link: "https://github.com/MIHIRY/Natural-Language-Processing---Word-Embeddings-Analysis",
-      skills: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
-    },
-    {
-      name: "LendingClub Credit Risk Analytics",
-      description:
-        "End-to-end credit risk pipeline on 837K LendingClub loans with calibrated XGBoost model (ROC-AUC 0.688). Implements cost-based approval policy saving $9.6M vs baseline with interactive Streamlit dashboard.",
-      link: "https://github.com/MIHIRY/lendingclub-credit-risk-analytics",
-      skills: ["Python", "XGBoost", "Streamlit", "Machine Learning", "Risk Modeling", "Jupyter"],
-    },
-    {
+{
       name: "FinanceIQ: AI-First Finance Analytics Platform",
       description:
         "AI-first finance analytics on Snowflake over real SEC EDGAR filings for 24 public SaaS companies — dbt-modeled, deterministic AI agent, Streamlit UI, CI.",
@@ -122,27 +66,83 @@ export const siteConfig = {
       link: "https://github.com/MIHIRY/FinanceIQ-AgentOS",
       skills: ["Python", "LLM", "AI Agents", "Finance", "Data Analytics"],
     },
-    {
+{
+      name: "RideOps AI",
+      description:
+        "NYC Taxi Demand Intelligence Platform — forecasts Yellow Taxi demand at zone and hourly level using 85.6M trip records. Features anomaly detection, congestion pricing impact analysis, and AI-powered demand insights.",
+      link: "https://github.com/MIHIRY/Rideops-AI",
+      skills: ["Python", "DuckDB", "dbt", "XGBoost", "Streamlit", "Claude API"],
+    },
+{
+      name: "LendingClub Credit Risk Analytics",
+      description:
+        "End-to-end credit risk pipeline on 837K LendingClub loans with calibrated XGBoost model (ROC-AUC 0.688). Implements cost-based approval policy saving $9.6M vs baseline with interactive Streamlit dashboard.",
+      link: "https://github.com/MIHIRY/lendingclub-credit-risk-analytics",
+      skills: ["Python", "XGBoost", "Streamlit", "Machine Learning", "Risk Modeling", "Jupyter"],
+    },
+{
       name: "PC SKU Demand Forecasting",
       description:
         "Demand forecasting system for personal computer SKUs leveraging statistical and machine learning approaches to predict inventory requirements and optimize stock allocation.",
       link: "https://github.com/MIHIRY/-pc-sku-demand-forecasting",
       skills: ["Python", "Machine Learning", "Forecasting", "Time Series", "Jupyter"],
     },
-    {
-      name: "Drive Telemetry Lakehouse",
+{
+      name: "Large-Scale Frequent Itemsets",
       description:
-        "End-to-end data engineering platform turning Backblaze hard-drive SMART data into live failure analytics. Daily telemetry replayed as Avro/Kafka events, streamed by Spark into Bronze Iceberg tables, refined to Silver, modeled into six Gold marts with dbt-trino. Airflow orchestrates medallion flow, Great Expectations gates quality, Trino serves lakehouse via shared REST catalog, Streamlit dashboard visualizes fleet reliability. Fully containerized; 500,582 events processed with 0 duplicates, 11/11 quality checks passing.",
-      link: "https://github.com/MIHIRY/Drive-Telemetry-Lakehouse",
-      skills: ["PySpark", "Apache Iceberg", "Kafka", "dbt", "Trino", "Airflow", "Great Expectations", "Streamlit", "Docker", "PostgreSQL"],
+        "Parallel association rule mining using Apriori, PCY, and SON algorithms with MPI across 10 processes on HPC clusters. Discovers frequently co-purchased product patterns in grocery transactions.",
+      link: "https://github.com/MIHIRY/Large-Scale-Frequent-Items",
+      skills: ["Python", "MPI", "HPC", "Apriori", "Data Mining"],
     },
-    {
-      name: "VEHICLE-TELEMETRY-PIPELINE",
+{
+      name: "Adaptive Query Ranker – SQL Performance Optimization",
       description:
-        "A production-style vehicle telemetry ELT pipeline that ingests, validates, quarantines, and transforms connected-car event data into analytics-ready marts for fleet monitoring and insight.",
-      link: "https://github.com/MIHIRY/-VEHICLE-TELEMETRY-PIPELINE",
-      skills: ["Python", "SQL", "dbt", "Airflow", "Snowflake", "DuckDB", "Docker", "ETL/ELT", "Data Quality", "Parquet"],
+        "Tree-aware transformer model that ranks database query execution plans to predict which plan executes faster. Uses LoRA for parameter-efficient fine-tuning on 35K+ query plan variants across 134 schemas.",
+      link: "https://github.com/MIHIRY/Cross-Plan",
+      skills: ["Python", "PyTorch", "Transformers", "LoRA", "SQL"],
     },
+{
+      name: "RAGFlow: Enhancing Research Paper Comprehension",
+      description:
+        "Advanced RAG system for research paper comprehension using vector embeddings and semantic search to enable intelligent querying and summarization of academic papers.",
+      link: "#",
+      skills: ["Python", "LLM", "RAG"],
+    },
+{
+      name: "Terrorism Risk Forecasting",
+      description:
+        "Analyzed global terrorism incidents from 1970–2017 using the Global Terrorism Database. Built predictive models with ANOVA, logistic regression, random forest, and time series forecasting.",
+      link: "https://github.com/MIHIRY/Terrorism-Risk-Forecasting-using-R",
+      skills: ["R", "Statistical Modeling", "Time Series", "Random Forest", "PCA"],
+    },
+{
+      name: "Hate Speech Detection Using Different Models",
+      description:
+        "Hate speech detection system using a dataset of over 10,000 entries. Implemented and compared multiple models, including Logistic Regression, SVM, Random Forest, and BERT.",
+      link: "https://github.com/MIHIRY/Hate-Speech-Recognition",
+      skills: ["Python", "NLTK", "Pandas", "Machine Learning", "Deep Learning"],
+    },
+{
+      name: "Neural Networks for POS Tagging & Bigram Language Modeling",
+      description:
+        "Implements neural networks for Part-of-Speech (POS) tagging and Bigram Language Models to enhance NLP tasks. Explores feature engineering, pretrained embeddings, and deep learning architectures.",
+      link: "https://github.com/MIHIRY/Neural-Networks-for-POS-Tagging-Bigram-Language-Modeling/tree/Publication-Certificate",
+      skills: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+    },
+{
+      name: "Word Embeddings Analysis",
+      description:
+        "This project uses statistical methods such as co-occurrence counting, TF-IDF, and PMI to explore various distributional semantics techniques for analyzing word representations.",
+      link: "https://github.com/MIHIRY/Natural-Language-Processing---Word-Embeddings-Analysis",
+      skills: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+    },
+{
+      name: "ContextType: Adaptive Keyboard System",
+      description:
+        "Intelligent keyboard interface that provides context-aware text suggestions using LLM technology. Detects writing context (programming, email, chat) and delivers real-time next-word predictions.",
+      link: "https://github.com/MIHIRY/HCI-",
+      skills: ["React", "TypeScript", "Node.js", "Express.js", "Groq API", "Tailwind CSS"],
+    }
   ],
   experience: [
     {
