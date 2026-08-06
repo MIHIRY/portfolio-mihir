@@ -172,7 +172,7 @@ export const siteConfig = {
     {
       company: "DBQ Technologies (Client: Bankhaus Scheich)",
       title: "Data Engineer",
-      dateRange: "Sept 2023 – March 2024",
+      dateRange: "June 2023 - March 2024",
       bullets: [
         "Developed automated ingestion pipelines integrating multi-source financial trading data.",
         "Designed optimized relational schemas for scalable and performant transaction processing.",
