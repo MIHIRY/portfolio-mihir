@@ -1,12 +1,76 @@
+/**
+ * A project as shown on the /projects page.
+ * `cover` is the path to a real screenshot in /public — leave it empty and the
+ * card renders its placeholder instead, at the same dimensions.
+ */
+export type FeaturedProject = {
+  name: string;
+  description: string;
+  link: string;
+  tags: string[];
+  cover: string;
+  /**
+   * "cover" (default) fills the plate and crops — right for app screenshots.
+   * "contain" fits the whole image in — use for diagrams, where cropping an
+   * edge would lop off part of the flow.
+   */
+  coverFit?: 'cover' | 'contain';
+  /**
+   * Tailwind aspect class for the plate, when the cover's own ratio is far from
+   * the card default (e.g. a wide DAG strip). Omit to use the card's ratio.
+   */
+  coverRatio?: string;
+  /**
+   * Let the card end just under its cover instead of stretching to the grid
+   * row and pinning text to the bottom. For covers far shorter than the row.
+   */
+  compact?: boolean;
+  /**
+   * Tool logos pinned to the card's bottom edge, each in an identical square
+   * box. Setting these replaces the card's text `tags` row, so `name` carries
+   * the alt text that row used to convey. Paths are case-sensitive on the
+   * deploy host.
+   */
+  logos?: { src: string; name: string }[];
+};
+
 export const siteConfig = {
   name: "Mihir Yanamandra",
   title: "Data Science Student at Stony Brook University",
   description: "Portfolio website of Mihir Yanamandra",
-  accentColor: "#1d4ed8",
+  // Hue 210 — the deep end of the same family as the /projects sky tokens
+  // (hue ~205). Was #1d4ed8 (hue 224), which read as an unrelated blue.
+  accentColor: "#1569BC",
+  /**
+   * Per-route <title> and meta description. Set client-side on navigation, so
+   * they reach users and Google (which renders JS) but NOT link-preview
+   * crawlers, which only read the static index.html.
+   */
+  pageMeta: {
+    home: {
+      title: "Mihir Yanamandra — Data Engineer",
+      description:
+        "Data engineer building scalable platforms in Python, SQL, PySpark, Databricks, Snowflake and dbt. ETL/ELT pipelines and dimensional models over 30M+ record datasets.",
+    },
+    projects: {
+      title: "Projects — Mihir Yanamandra",
+      description:
+        "Data engineering projects: lakehouses on Iceberg and Microsoft Fabric, streaming telemetry with Kafka and Spark, dbt-modelled warehouses, and demand forecasting at scale.",
+    },
+    notFound: {
+      title: "Page not found — Mihir Yanamandra",
+      description: "That page does not exist. Head back to the portfolio or the projects page.",
+    },
+  },
+  /** Square face crop of `portrait` for the header avatar. */
+  avatar: "/avatar.jpg",
+  /** Portrait for the /projects page. Falls back to the placeholder plate if missing. */
+  portrait: "/portrait.jpg",
   social: {
     email: "mihiryanamandra10@gmail.com",
     universityEmail: "mihir.yanamandra@stonybrook.edu",
     linkedin: "https://www.linkedin.com/in/mihir-yanamandra-60358021b",
+    calendar: "https://calendar.app.google/RQcvC6Kf1yH2BBE79",
     twitter: "",
     github: "https://github.com/MIHIRY",
   },
@@ -43,6 +107,179 @@ export const siteConfig = {
     "Jupyter",
     "GitHub",
   ],
+  /** Tech strip on the /projects page. Curated and ordered — not the same set as `skills`. */
+  dataStack: [
+    "Azure",
+    "Microsoft Fabric",
+    "AWS",
+    "Databricks",
+    "dbt",
+    "Snowflake",
+    "PySpark",
+    "Airflow",
+    "AWS Glue",
+    "Amazon S3",
+    "Redshift",
+    "AWS Lambda",
+    "Hadoop",
+    "Power BI",
+  ],
+  /**
+   * Verifiable credentials for the /projects page card. Kept separate from
+   * `certifications` below, which the home page renders with issuer/date/
+   * description — fields a credential URL alone does not supply.
+   */
+  credentials: [
+    {
+      name: "The Rise of the AI Data Engineer Boot Camp",
+      link: "https://learn.dataexpert.io/certification/mihiryanamandra89421/the-rise-of-the-ai-data-engineer-boot-camp-8b5975",
+    },
+    {
+      name: "Google Advanced Data Analytics Professional Certificate",
+      link: "https://www.credly.com/badges/93c20b6e-eff1-402a-bd27-cdc0f2bea81c/public_url",
+    },
+  ],
+  /**
+   * Reading list on the /projects page. Save covers to /public and point
+   * `cover` at them; an empty string renders the placeholder plate instead.
+   * The takeaways are drafts — rewrite them in your own words.
+   */
+  reading: [
+    // `link` points at your own write-up for each book — the card only becomes
+    // clickable once a url is set, so no dead links in the meantime.
+    {
+      title: "AI Engineering",
+      author: "Chip Huyen",
+      takeaway: "The hard part of AI isn’t making it work once. It’s knowing whether it works reliably.",
+      cover: "/book-ai-engineering.jpg",
+      link: "",
+    },
+    {
+      title: "Fundamentals of Data Engineering",
+      author: "Joe Reis & Matt Housley",
+      takeaway: "Great data engineering is invisible: when the foundation is strong, everything built on top of it simply works.",
+      cover: "/book-fundamentals-de.jpg",
+      link: "",
+    },
+    {
+      title: "Designing Data-Intensive Applications",
+      author: "Martin Kleppmann",
+      takeaway: "A system isn’t truly well-designed when everything works; it’s well-designed when things fail and the system still works.",
+      cover: "/book-ddia.jpg",
+      link: "",
+    },
+  ],
+  /** The four projects headlining the /projects page. */
+  featuredProjects: [
+    {
+      name: "NYC Taxi Demand Platform",
+      description:
+        "Forecasts Yellow Taxi demand by zone and hour across 85.6M trip records. Surfaces anomalies and measures the impact of congestion pricing.",
+      link: "https://github.com/MIHIRY/Rideops-AI",
+      tags: ["DuckDB", "dbt", "XGBoost"],
+      cover: "/nyc-taxi-demand.jpg",
+    },
+    {
+      name: "Finance Data Engineering Pipeline",
+      description:
+        "A Microsoft Fabric lakehouse turning 6.3M PaySim transactions into fraud analytics. PySpark lands raw CSV in Bronze Delta tables, then dbt models staging through to a governed star schema. A parameter-driven pipeline runs full or watermarked loads behind all 52 dbt tests.",
+      link: "https://github.com/MIHIRY/microsoft-fabric-finance-lakehouse",
+      tags: ["Microsoft Fabric", "Lakehouse", "SQL"],
+      cover: "/finance-lakehouse.jpg",
+      coverFit: "contain",
+    },
+    {
+      name: "Drive Telemetry Lakehouse",
+      description:
+        "Turns Backblaze drive telemetry into live failure analytics — Kafka events streamed by Spark into Iceberg tables, modeled with dbt-trino.",
+      link: "https://github.com/MIHIRY/Drive-Telemetry-Lakehouse",
+      tags: ["PySpark", "Iceberg", "Airflow"],
+      cover: "/drive-telemetry.jpg",
+      coverFit: "contain",
+    },
+    {
+      name: "Vehicle Telemetry Pipeline",
+      description:
+        "A production-style ELT pipeline that ingests, validates and quarantines connected-car events, then shapes them into fleet-monitoring marts.",
+      link: "https://github.com/MIHIRY/-VEHICLE-TELEMETRY-PIPELINE",
+      tags: ["Airflow", "Snowflake", "dbt"],
+      cover: "/vehicle-telemetry.png",
+      // Source is only 538x277; "cover" would upscale ~1.4x and go soft.
+      coverFit: "contain",
+    },
+  ] satisfies FeaturedProject[],
+  /** Placeholders — same shape, so swapping in real data needs no layout change. */
+  upcomingProjects: [
+    {
+      name: "RAGFlow",
+      description:
+        "Advanced RAG system for research paper comprehension, using vector embeddings and semantic search to query and summarize academic papers.",
+      link: "https://github.com/MIHIRY/RagFlow",
+      tags: ["Python", "LLM", "RAG"],
+      cover: "/rag-pipeline.png",
+      // Source is 1233x297 (4.15); a 4/1 plate fits it with ~4% letterbox.
+      coverFit: "contain",
+      coverRatio: "aspect-[2/1] lg:aspect-[4/1]",
+      compact: true,
+    },
+    {
+      name: "Terrorism Risk Forecasting",
+      description:
+        "Airflow-orchestrated ELT: GTD and UN data land as Parquet, pass quality gates, then load a DuckDB star schema modeled staging-to-marts with dbt.",
+      link: "https://github.com/MIHIRY/Terrorism-Risk-Forecasting-using-R",
+      tags: ["DuckDB", "dbt", "Airflow"],
+      // 1143x708 (1.61) against a 16/10 plate — "cover" crops ~3px, so it fills.
+      cover: "/terrorism-risk.jpg",
+      // Cover is far shorter than the row, so the default bottom-pinned text
+      // left an 85px gap under it. Sit the text just below the image instead.
+      compact: true,
+      // Fills the slack that `compact` moves to the card's foot, and replaces
+      // the text tags row that named the same three tools.
+      logos: [
+        { src: "/duckdb.png", name: "DuckDB" },
+        { src: "/dbt.png", name: "dbt" },
+        { src: "/Airflow.png", name: "Airflow" },
+      ],
+    },
+    {
+      name: "AI Project Copilot",
+      description:
+        "AI project discovery on Databricks. Spark ingests GitHub, EXA and OpenAlex; RAG search plus an agent-run roadmap.",
+      link: "https://github.com/MIHIRY/databricks-ai-project-copilot-capstone",
+      tags: ["Databricks", "Spark", "RAG"],
+      // 1200x630 (1.9) logo on white. "contain" (never crop a logo) on a
+      // matching 19/10 plate, so no blue band frames the white artwork.
+      cover: "/ai-copilot.webp",
+      coverFit: "contain",
+      coverRatio: "aspect-[19/10]",
+    },
+    {
+      name: "Adaptive Query Ranker",
+      description:
+        "Tree-aware transformer that ranks SQL execution plans to predict the faster one, LoRA-tuned on 35K plan variants across 134 schemas.",
+      link: "https://github.com/MIHIRY/Cross-Plan",
+      tags: ["PyTorch", "LoRA", "SQL"],
+      // 1421x636 (2.23) — a 9/4 plate fits the 4-stage flow with ~1% letterbox.
+      cover: "/cross-plan.jpg",
+      coverFit: "contain",
+      coverRatio: "aspect-[2/1] lg:aspect-[9/4]",
+    },
+    {
+      // Rendered in the tile the Databricks card vacated, not in the map's
+      // own run of cells — see ProjectsPage.
+      name: "Music Intelligence Platform",
+      description:
+        "Music intelligence platform processing over 141M listens for trends, retention, discovery, loyalty, and recommendations.",
+      // No repo yet, so the card stays unclickable rather than carry a dead link.
+      link: "",
+      tags: ["Docker", "Apache Airflow", "Python"],
+      // 2172x724 is exactly 3.0, so a 3/1 plate fits it edge to edge with no
+      // letterbox at all — the image meets both sides of the card.
+      cover: "/spotify.png",
+      coverRatio: "aspect-[3/1]",
+      compact: true,
+    },
+] satisfies FeaturedProject[],
   projects: [
 {
       name: "Drive Telemetry Lakehouse",
@@ -105,7 +342,7 @@ export const siteConfig = {
       name: "RAGFlow: Enhancing Research Paper Comprehension",
       description:
         "Advanced RAG system for research paper comprehension using vector embeddings and semantic search to enable intelligent querying and summarization of academic papers.",
-      link: "#",
+      link: "https://github.com/MIHIRY/RagFlow",
       skills: ["Python", "LLM", "RAG"],
     },
 {
@@ -197,6 +434,8 @@ export const siteConfig = {
   education: [
     {
       school: "Stony Brook University — Stony Brook, NY",
+      /** Compact form for the /projects education card. */
+      shortName: "Stony Brook University",
       degree: "Master of Science in Data Science",
       dateRange: "Aug 2024 – Jun 2026",
       achievements: [
@@ -206,6 +445,7 @@ export const siteConfig = {
     },
     {
       school: "Gandhi Institute of Technology and Management (GITAM) — Visakhaputnam, India",
+      shortName: "GITAM University",
       degree: "Bachelor of Technology in Computer Science and Engineering",
       dateRange: "Jun 2019 – Jul 2023",
       achievements: [
@@ -214,6 +454,12 @@ export const siteConfig = {
     },
   ],
   certifications: [
+    {
+      title: "The Rise of the AI Data Engineer Boot Camp",
+      issuer: "DataExpert.io — Zach Wilson",
+      date: "2026",
+      description: "Applying AI and large language models to modern data engineering practice",
+    },
     {
       title: "Machine Learning Specialization",
       issuer: "Coursera - Stanford University",

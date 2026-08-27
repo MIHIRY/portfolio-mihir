@@ -3,11 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --accent-color: #1d4ed8;
+  --accent-color: #1569BC;
+  /* One curve for the whole site. Stock ease-out is too weak to read as intentional. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Clears the fixed header when jumping to a section anchor. */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -16,10 +29,41 @@ body {
   background-color: #ffffff;
 }
 
+/* Scroll-reveal for the projects page. Stagger comes from an inline transition-delay. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn,
+  .animate-fadeIn-delay-1,
+  .animate-fadeIn-delay-2,
+  .animate-fadeIn-delay-3 {
+    animation: none;
+    opacity: 1;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms !important;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -28,20 +72,86 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 500ms var(--ease-out) forwards;
 }
 
 .animate-fadeIn-delay-1 {
-  animation: fadeIn 0.8s ease-out 0.2s forwards;
+  animation: fadeIn 500ms var(--ease-out) 60ms forwards;
   opacity: 0;
 }
 
 .animate-fadeIn-delay-2 {
-  animation: fadeIn 0.8s ease-out 0.4s forwards;
+  animation: fadeIn 500ms var(--ease-out) 120ms forwards;
   opacity: 0;
 }
 
 .animate-fadeIn-delay-3 {
-  animation: fadeIn 0.8s ease-out 0.6s forwards;
+  animation: fadeIn 500ms var(--ease-out) 180ms forwards;
   opacity: 0;
+}
+
+/* Mobile navigation overlay entrance. */
+.nav-overlay {
+  animation: navOverlayIn 200ms var(--ease-out) both;
+}
+
+@keyframes navOverlayIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-overlay {
+    animation: navOverlayInReduced 120ms linear both;
+  }
+  @keyframes navOverlayInReduced {
+    from { opacity: 0; }
+  }
+}
+
+
+/* ---- Desktop nav active-section rule ----------------------------------------
+   One rule for the whole nav, moved between links, rather than an underline per
+   link fading in and out — the reader tracks a single object instead of six
+   unrelated events. It travels on transform only (translateX + scaleX of a 1px
+   box), so the move is composited and never reflows the links above it.
+
+   Position is set with no transition while the rule is hidden, so it appears in
+   place rather than sliding in from the left the first time it is shown. Only a
+   move between two visible links animates. ------------------------------------ */
+.nav-rule {
+  transition: opacity 200ms var(--ease-out);
+}
+
+.nav-rule[data-move='true'] {
+  transition:
+    transform 200ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The state still changes — it just stops sliding. */
+  .nav-rule[data-move='true'] {
+    transition: opacity 200ms var(--ease-out);
+  }
+}
+
+/* ---- Route transition -------------------------------------------------------
+   React Router adds `viewTransition` to each Link, which runs the navigation
+   inside document.startViewTransition. The browser's default root animation is
+   already a crossfade — this only shortens it and puts it on the site curve.
+   Browsers without View Transitions simply navigate instantly. -------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }

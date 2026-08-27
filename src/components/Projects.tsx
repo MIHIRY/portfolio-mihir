@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../config';
+import { ArrowOut } from './ProjectCard';
+import Reveal from './Reveal';
 
 export default function Projects() {
   if (siteConfig.projects.length === 0) return null;
@@ -7,25 +10,38 @@ export default function Projects() {
     <section id="projects" className="py-16 sm:py-20 md:py-24 lg:py-32 px-8 sm:px-12 md:px-16 lg:px-24">
       <div className="max-w-7xl mx-auto">
         {/* Centered header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-black">
+        <Reveal className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black">
             Projects
           </h2>
           <div
             className="w-12 h-1 mt-4 mx-auto"
             style={{ backgroundColor: siteConfig.accentColor }}
           />
-        </div>
+          <p className="mt-6 text-sm text-gray-600 sm:text-base">
+            Selected work is written up on the{' '}
+            <Link
+              viewTransition
+              to="/projects"
+              className="rounded-sm font-bold underline underline-offset-4 transition-opacity duration-200 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+              style={{ color: siteConfig.accentColor }}
+            >
+              projects page
+            </Link>
+            .
+          </p>
+        </Reveal>
 
-        {/* 2-column grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* 2-column grid. One group for all 14 cards — a per-card stagger would
+            leave the last rows waiting on a delay they never see anyway. */}
+        <Reveal delay={70} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {siteConfig.projects.map((project, index) => (
             <a
               key={index}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col p-8 rounded-lg bg-gray-50 hover:bg-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group min-h-[220px]"
+              className="flex flex-col p-8 rounded-lg bg-gray-50 hover:bg-gray-100 hover:-translate-y-1 active:scale-[0.99] transition-[transform,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 group min-h-[220px]"
             >
               <div className="flex justify-between items-start flex-1">
                 <div className="flex-1 min-w-0">
@@ -42,28 +58,14 @@ export default function Projects() {
                     {project.description}
                   </p>
                 </div>
-                <div className="ml-4 flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M7 17L17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
-                </div>
+                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </div>
               <div className="flex flex-wrap gap-2 mt-auto pt-4">
                 {project.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-blue-600 text-white rounded-full text-xs"
+                    className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium"
+                    style={{ color: siteConfig.accentColor }}
                   >
                     {skill}
                   </span>
@@ -71,7 +73,7 @@ export default function Projects() {
               </div>
             </a>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,0 +1,4 @@
+# SPA fallback: /projects and any future route are client-side only, so every
+# path must serve index.html and let React Router resolve it. Without this a
+# direct hit or refresh on /projects returns 404.
+/*    /index.html   200

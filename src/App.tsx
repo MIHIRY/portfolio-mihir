@@ -1,31 +1,77 @@
+import { useEffect, type ReactNode } from 'react';
+import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Education from './components/Education';
-import Certifications from './components/Certifications';
-import Publications from './components/Publications';
-import Blogs from './components/Blogs';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import ProjectsPage from './pages/ProjectsPage';
+import NotFound from './pages/NotFound';
 
-function App() {
+/** Scrolls to the hash target on navigation, or to the top on a plain route change. */
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto'
+          : 'smooth',
+      });
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname, hash]);
+
+  return null;
+}
+
+/** The one-page site's chrome. The projects page carries its own header instead. */
+function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Education />
-        <Certifications />
-        <Publications />
-        <Blogs />
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
   );
 }
 
-export default App;
+function Root() {
+  return (
+    <>
+      <ScrollManager />
+      <Outlet />
+    </>
+  );
+}
+
+/**
+ * A data router, not <BrowserRouter>. React Router only honours a Link's
+ * `viewTransition` prop when `router.window` is set, which only the data router
+ * does — with the declarative router the prop is silently ignored.
+ */
+export const router = createBrowserRouter([
+  {
+    element: <Root />,
+    children: [
+      {
+        path: '/',
+        element: (
+          <SiteLayout>
+            <Home />
+          </SiteLayout>
+        ),
+      },
+      { path: '/projects', element: <ProjectsPage /> },
+      {
+        // Was rendering Home, so a mistyped url silently looked valid.
+        path: '*',
+        element: (
+          <SiteLayout>
+            <NotFound />
+          </SiteLayout>
+        ),
+      },
+    ],
+  },
+]);

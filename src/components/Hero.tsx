@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../config';
 
 function SvgFallbackBg() {
@@ -73,11 +74,29 @@ export default function Hero() {
         <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium mb-8 animate-fadeIn-delay-2">
           {siteConfig.title}
         </p>
+        <div className="flex flex-wrap items-center gap-4 mb-8 animate-fadeIn-delay-3">
+          <Link
+            viewTransition
+            to="/projects"
+            className="rounded-lg px-6 py-3 text-sm font-bold text-white transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            style={{ backgroundColor: siteConfig.accentColor }}
+          >
+            View my projects
+          </Link>
+          <a
+            href={siteConfig.social.calendar}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg border border-gray-300 bg-white/70 px-6 py-3 text-sm font-bold text-gray-900 backdrop-blur-sm transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+          >
+            Schedule a coffee chat
+          </a>
+        </div>
         <div className="flex items-center gap-6 animate-fadeIn-delay-3">
           {siteConfig.social.email && (
             <a
               href={`mailto:${siteConfig.social.email}`}
-              className="text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-300"
+              className="rounded-sm text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               aria-label="Email"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -91,7 +110,7 @@ export default function Hero() {
               href={siteConfig.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-300"
+              className="rounded-sm text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               aria-label="LinkedIn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -106,7 +125,7 @@ export default function Hero() {
               href={siteConfig.social.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-300"
+              className="rounded-sm text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               aria-label="Twitter"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -119,7 +138,7 @@ export default function Hero() {
               href={siteConfig.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-300"
+              className="rounded-sm text-gray-600 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               aria-label="GitHub"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

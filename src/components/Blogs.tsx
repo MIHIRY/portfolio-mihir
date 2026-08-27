@@ -1,4 +1,6 @@
 import { siteConfig } from '../config';
+import Reveal from './Reveal';
+import { ArrowOut } from './ProjectCard';
 
 export default function Blogs() {
   if (siteConfig.blogs.length === 0) return null;
@@ -6,23 +8,23 @@ export default function Blogs() {
   return (
     <section id="blogs" className="py-16 sm:py-20 md:py-24 lg:py-32 px-8 sm:px-12 md:px-16 lg:px-24">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-        <div className="lg:col-span-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-black">
+        <Reveal className="lg:col-span-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black">
             Blogs
           </h2>
           <div
             className="w-12 h-1 mt-4"
             style={{ backgroundColor: siteConfig.accentColor }}
           />
-        </div>
-        <div className="lg:col-span-8 space-y-6">
+        </Reveal>
+        <Reveal delay={70} className="lg:col-span-8 space-y-6">
           {siteConfig.blogs.map((blog, index) => (
             <a
               key={index}
               href={blog.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block p-6 rounded-lg bg-gray-50 hover:bg-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+              className="block p-6 rounded-lg bg-gray-50 hover:bg-gray-100 hover:-translate-y-1 active:scale-[0.99] transition-[transform,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 group"
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
@@ -39,26 +41,11 @@ export default function Blogs() {
                     {blog.description}
                   </p>
                 </div>
-                <div className="ml-4 flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M7 17L17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
-                </div>
+                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </div>
             </a>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

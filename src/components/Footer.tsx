@@ -1,20 +1,21 @@
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../config';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navSections = [
-    { id: 'about', label: 'About', show: true },
-    { id: 'projects', label: 'Projects', show: siteConfig.projects.length > 0 },
-    { id: 'experience', label: 'Experience', show: siteConfig.experience.length > 0 },
-    { id: 'education', label: 'Education', show: siteConfig.education.length > 0 },
-    { id: 'certifications', label: 'Certifications', show: siteConfig.certifications.length > 0 },
-    { id: 'publications', label: 'Publications', show: siteConfig.publications.length > 0 },
-    { id: 'blogs', label: 'Blogs', show: siteConfig.blogs.length > 0 },
+    { id: 'about', label: 'About', to: '/#about', show: true },
+    { id: 'projects', label: 'Projects', to: '/projects', show: siteConfig.projects.length > 0 },
+    { id: 'experience', label: 'Experience', to: '/#experience', show: siteConfig.experience.length > 0 },
+    { id: 'education', label: 'Education', to: '/#education', show: siteConfig.education.length > 0 },
+    { id: 'certifications', label: 'Certifications', to: '/#certifications', show: siteConfig.certifications.length > 0 },
+    { id: 'publications', label: 'Publications', to: '/#publications', show: siteConfig.publications.length > 0 },
+    { id: 'blogs', label: 'Blogs', to: '/#blogs', show: siteConfig.blogs.length > 0 },
   ].filter((s) => s.show);
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-black px-8 sm:px-12 md:px-16 lg:px-24 py-16 relative overflow-hidden">
+    <footer className="bg-ink px-8 sm:px-12 md:px-16 lg:px-24 py-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
         <div>
           <h3 className="text-xl sm:text-2xl font-bold text-white">
@@ -25,7 +26,7 @@ export default function Footer() {
             {siteConfig.social.email && (
               <a
                 href={`mailto:${siteConfig.social.email}`}
-                className="text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-300"
+                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
                 aria-label="Email"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -39,7 +40,7 @@ export default function Footer() {
                 href={siteConfig.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-300"
+                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
                 aria-label="LinkedIn"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -54,7 +55,7 @@ export default function Footer() {
                 href={siteConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-300"
+                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
                 aria-label="GitHub"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,37 +66,27 @@ export default function Footer() {
             )}
           </div>
         </div>
-        <nav className="hidden md:block">
-          <ul className="space-y-2">
+        <nav>
+          <ul className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-3 md:block md:space-y-2">
             {navSections.map((section) => (
               <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  className="text-gray-400 hover:text-white transition-colors duration-300 text-sm font-medium"
+                <Link
+                  viewTransition
+                  to={section.to}
+                  className="rounded-sm text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
                 >
                   {section.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
       </div>
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-700">
+      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/15">
         <p className="text-gray-500 text-sm">
           &copy; {currentYear} {siteConfig.name}
         </p>
       </div>
-      {/* Decorative wave */}
-      <svg
-        className="absolute bottom-0 left-0 right-0 w-full opacity-5"
-        viewBox="0 0 1440 100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0,50 C360,100 720,0 1080,50 C1260,75 1350,62.5 1440,50 L1440,100 L0,100 Z"
-          fill="currentColor"
-        />
-      </svg>
     </footer>
   );
 }
