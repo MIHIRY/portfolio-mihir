@@ -5,7 +5,7 @@ import { useNavPanel } from '../useNavPanel';
 import { useActiveSection } from '../useActiveSection';
 
 const navSections = [
-  { id: 'about', label: 'About', to: '/about#about' },
+  { id: 'about', label: 'About', to: '/about' },
   { id: 'projects', label: 'Projects', to: '/' },
   { id: 'skills', label: 'Skills', to: '/skills' },
   { id: 'experience', label: 'Experience', to: '/about#experience' },

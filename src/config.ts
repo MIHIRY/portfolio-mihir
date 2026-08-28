@@ -44,7 +44,7 @@ export type SkillGroup = {
 
 export const siteConfig = {
   name: "Mihir Yanamandra",
-  title: "Data Science Student at Stony Brook University",
+  title: "Data Professional",
   description: "Portfolio website of Mihir Yanamandra",
   // Hue 210 — the deep end of the same family as the /projects sky tokens
   // (hue ~205). Was #1d4ed8 (hue 224), which read as an unrelated blue.
@@ -294,7 +294,7 @@ export const siteConfig = {
   /** The four projects headlining the /projects page. */
   featuredProjects: [
     {
-      name: "NYC Taxi Demand Platform",
+      name: "NYC Taxi Demand Pipeline",
       description:
         "Forecasts Yellow Taxi demand by zone and hour across 85.6M trip records. Surfaces anomalies and measures the impact of congestion pricing.",
       link: "https://github.com/MIHIRY/Rideops-AI",
@@ -333,7 +333,7 @@ export const siteConfig = {
   /** Placeholders — same shape, so swapping in real data needs no layout change. */
   upcomingProjects: [
     {
-      name: "RAGFlow",
+      name: "RAGFlow Pipeline",
       description:
         "Advanced RAG system for research paper comprehension, using vector embeddings and semantic search to query and summarize academic papers.",
       link: "https://github.com/MIHIRY/RagFlow",
@@ -345,7 +345,7 @@ export const siteConfig = {
       compact: true,
     },
     {
-      name: "Terrorism Risk Forecasting",
+      name: "Terrorism Risk Forecasting Pipeline",
       description:
         "Airflow-orchestrated ELT: GTD and UN data land as Parquet, pass quality gates, then load a DuckDB star schema modeled staging-to-marts with dbt.",
       link: "https://github.com/MIHIRY/Terrorism-Risk-Forecasting-using-R",
@@ -364,7 +364,7 @@ export const siteConfig = {
       ],
     },
     {
-      name: "AI Project Copilot",
+      name: "AI Project Copilot Pipeline",
       description:
         "AI project discovery on Databricks. Spark ingests GitHub, EXA and OpenAlex; RAG search plus an agent-run roadmap.",
       link: "https://github.com/MIHIRY/databricks-ai-project-copilot-capstone",
@@ -389,7 +389,7 @@ export const siteConfig = {
     {
       // Rendered in the tile the Databricks card vacated, not in the map's
       // own run of cells — see ProjectsPage.
-      name: "Music Intelligence Platform",
+      name: "Music Intelligence Pipeline",
       description:
         "Music intelligence platform processing over 141M listens for trends, retention, discovery, loyalty, and recommendations.",
       // No repo yet, so the card stays unclickable rather than carry a dead link.

@@ -9,7 +9,10 @@ import NotFound from './pages/NotFound';
 
 /** Scrolls to the hash target on navigation, or to the top on a plain route change. */
 function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  // `key` changes on every navigation, including a push to the location you are
+  // already on. Without it, clicking About from halfway down /about would leave
+  // the page where it was, because pathname and hash never changed.
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (hash) {
@@ -21,7 +24,7 @@ function ScrollManager() {
       return;
     }
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname, hash]);
+  }, [pathname, hash, key]);
 
   return null;
 }

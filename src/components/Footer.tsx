@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navSections = [
-    { id: 'about', label: 'About', to: '/about#about', show: true },
+    { id: 'about', label: 'About', to: '/about', show: true },
     { id: 'projects', label: 'Projects', to: '/', show: siteConfig.projects.length > 0 },
     { id: 'skills', label: 'Skills', to: '/skills', show: true },
     { id: 'experience', label: 'Experience', to: '/about#experience', show: siteConfig.experience.length > 0 },

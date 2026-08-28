@@ -15,14 +15,14 @@ import { useDocumentMeta } from '../useDocumentMeta';
  * set of icons is therefore all tiles, and one with none is all pills, without
  * either being a special case.
  */
-function SkillCard({ group }: { group: SkillGroup }) {
+function SkillCard({ group, span = '' }: { group: SkillGroup; span?: string }) {
   const withMarks = group.items.filter((item) => item.icon);
   const withoutMarks = group.items.filter((item) => !item.icon);
 
   return (
-    // `break-inside-avoid` keeps a card whole — CSS columns will otherwise split
-    // one across a column boundary.
-    <section className="mb-3 break-inside-avoid rounded-3xl bg-night-card p-6 sm:mb-4 sm:p-7 lg:p-8">
+    // `h-full` is what levels the row: a grid item stretches to the tallest card
+    // beside it, so every row closes on one line.
+    <section className={`h-full rounded-3xl bg-night-card p-6 sm:p-7 lg:p-8 ${span}`}>
       {withMarks.length > 0 && (
         <ul className="flex flex-wrap items-center gap-3">
           {withMarks.map((item) => (
@@ -86,14 +86,23 @@ export default function SkillsPage() {
           </section>
         </Reveal>
 
-        {/* Native CSS columns give the reference's masonry packing — cards of
-            different heights, no gaps, no JS and no layout library. Column count
-            steps 1 → 2 → 3 the way the project grid does; the card itself is
-            identical at every width. */}
+        {/* A grid, not CSS columns. Columns packed tighter but each one stopped
+            wherever its own contents ran out — a 176px ragged edge across the
+            three. Here every card in a row shares the row's height, so the rows
+            close on one line. 13 cards leaves the last row short, so that card
+            spans the full width and the block ends flush. */}
         <Reveal delay={70} className="mt-3 block sm:mt-4">
-          <div className="columns-1 gap-3 sm:gap-4 md:columns-2 lg:columns-3">
-            {siteConfig.skillGroups.map((group) => (
-              <SkillCard key={group.name} group={group} />
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {siteConfig.skillGroups.map((group, i) => (
+              <SkillCard
+                key={group.name}
+                group={group}
+                span={
+                  i === siteConfig.skillGroups.length - 1
+                    ? 'md:col-span-2 lg:col-span-3'
+                    : ''
+                }
+              />
             ))}
           </div>
         </Reveal>

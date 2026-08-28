@@ -275,7 +275,7 @@ export default function ProjectsPage() {
               <p className="absolute left-7 top-7 max-w-[20rem] text-sm leading-[1.6] text-ink sm:left-9 sm:top-9 sm:text-base lg:left-10 lg:top-10 lg:text-lg">
                 <span className="block font-bold">welcome to my realm of</span>{' '}
                 <span className="block">
-                  <span className="font-bold">wild projects</span>{' '}
+                  <span className="font-bold">projects</span>{' '}
                   <span className="font-light italic">and awesome</span>
                 </span>{' '}
                 <span className="block font-bold">creations</span>

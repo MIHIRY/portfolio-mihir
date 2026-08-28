@@ -106,7 +106,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
         >
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:gap-x-8 min-[1440px]:gap-x-7">
             <li>
-              <Link viewTransition to="/about#about" className={linkClass(tone)}>
+              <Link viewTransition to="/about" className={linkClass(tone)}>
                 [About]
               </Link>
             </li>
@@ -169,7 +169,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
           <nav aria-label="Sections" className="min-h-0 flex-1 overflow-y-auto py-6">
             <ul className="space-y-1">
               <li>
-                <Link viewTransition to="/about#about" onClick={close} className={overlayLinkClass}>
+                <Link viewTransition to="/about" onClick={close} className={overlayLinkClass}>
                   About
                 </Link>
               </li>
