@@ -1,21 +1,47 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { siteConfig } from '../config';
 import { useNavPanel } from '../useNavPanel';
 
-const linkClass =
-  'text-xs uppercase tracking-[0.16em] text-ink transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-surface rounded-sm xl:text-sm';
+/**
+ * The bar carries the page's own surface. /skills runs on the dark set, so the
+ * chrome follows it rather than floating a sky-blue bar on near-black. The
+ * overlay is already `bg-ink/95` in both tones and needs no variant.
+ */
+const TONES = {
+  light: {
+    bar: 'bg-surface',
+    text: 'text-ink',
+    ring: 'focus-visible:ring-ink focus-visible:ring-offset-surface',
+  },
+  dark: {
+    bar: 'bg-night-card',
+    text: 'text-night-ink',
+    ring: 'focus-visible:ring-night-ink focus-visible:ring-offset-night-card',
+  },
+} as const;
+
+export type NavTone = keyof typeof TONES;
+
+const linkClass = (tone: NavTone) =>
+  `text-xs uppercase tracking-[0.16em] ${TONES[tone].text} transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 ${TONES[tone].ring} focus-visible:ring-offset-4 rounded-sm xl:text-sm`;
 
 const overlayLinkClass =
   'block rounded-sm py-1 text-[30px] leading-tight text-white/85 transition-opacity duration-200 active:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink';
 
-export default function ProjectsNav() {
+export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
+  const t = TONES[tone];
+  // This bar sits on both / and /skills. A fixed entry is wrong on one of them —
+  // it either points at the page you are already reading or omits the other one
+  // entirely. So the slot always names the page you are *not* on.
+  const onSkills = useLocation().pathname === '/skills';
+  const cross = onSkills ? { to: '/', label: 'Projects' } : { to: '/skills', label: 'Skills' };
   const [first, ...rest] = siteConfig.name.split(' ');
   const headerRef = useRef<HTMLElement>(null);
   const { open, setOpen, close, triggerRef, panelRef } = useNavPanel(headerRef);
 
   return (
-    <header ref={headerRef} className="rounded-3xl bg-surface px-7 py-6 sm:px-9 lg:px-10 lg:py-9">
+    <header ref={headerRef} className={`rounded-3xl ${t.bar} px-7 py-6 sm:px-9 lg:px-10 lg:py-9`}>
       {/* Below sm the nav and CTA move into the overlay — inline they cost three
           stacked rows and ate the whole first screen on a phone. From sm the CTA
           takes its own centred row rather than squeezing the wordmark and nav; at
@@ -25,7 +51,7 @@ export default function ProjectsNav() {
         <Link
           viewTransition
           to="/"
-          className="flex items-center gap-3 rounded-sm text-base uppercase tracking-[0.18em] text-ink transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-surface sm:col-start-1 sm:row-start-1 sm:text-lg xl:text-xl"
+          className={`flex items-center gap-3 rounded-sm text-base uppercase tracking-[0.18em] ${t.text} transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 ${t.ring} focus-visible:ring-offset-4 sm:col-start-1 sm:row-start-1 sm:text-lg xl:text-xl`}
         >
           <img
             src={siteConfig.avatar}
@@ -48,7 +74,7 @@ export default function ProjectsNav() {
           aria-expanded={open}
           aria-controls="projects-menu"
           aria-label="Open navigation"
-          className="-mr-2 rounded-sm p-2 text-ink transition-transform duration-200 active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-surface sm:hidden"
+          className={`-mr-2 rounded-sm p-2 ${t.text} transition-transform duration-200 active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 ${t.ring} focus-visible:ring-offset-2 sm:hidden`}
         >
           <svg
             width="22"
@@ -69,7 +95,7 @@ export default function ProjectsNav() {
           href={siteConfig.social.calendar}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden rounded-sm text-sm font-bold tracking-[0.08em] text-ink sm:whitespace-nowrap transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-surface sm:col-span-2 sm:row-start-2 sm:block sm:justify-self-center min-[1440px]:col-span-1 min-[1440px]:col-start-2 min-[1440px]:row-start-1 xl:text-base"
+          className={`hidden rounded-sm text-sm font-bold tracking-[0.08em] ${t.text} sm:whitespace-nowrap transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 ${t.ring} focus-visible:ring-offset-4 sm:col-span-2 sm:row-start-2 sm:block sm:justify-self-center min-[1440px]:col-span-1 min-[1440px]:col-start-2 min-[1440px]:row-start-1 xl:text-base`}
         >
           [ Schedule a Coffee Chat ]
         </a>
@@ -80,28 +106,24 @@ export default function ProjectsNav() {
         >
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:gap-x-8 min-[1440px]:gap-x-7">
             <li>
-              <Link viewTransition to="/#about" className={linkClass}>
+              <Link viewTransition to="/about#about" className={linkClass(tone)}>
                 [About]
               </Link>
             </li>
             <li>
-              <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                [GitHub]
-              </a>
+              <Link viewTransition to={cross.to} className={linkClass(tone)}>
+                [{cross.label}]
+              </Link>
             </li>
             <li>
-              {/* Same-page jump; the browser handles the scroll natively. */}
-              <a href="#reading" className={linkClass}>
+              {/* Route-qualified: this bar also renders on /skills, where a bare
+                  #reading would point at nothing. */}
+              <Link viewTransition to="/#reading" className={linkClass(tone)}>
                 [What I Read]
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={`mailto:${siteConfig.social.email}`} className={linkClass}>
+              <a href={`mailto:${siteConfig.social.email}`} className={linkClass(tone)}>
                 [Contact]
               </a>
             </li>
@@ -147,25 +169,19 @@ export default function ProjectsNav() {
           <nav aria-label="Sections" className="min-h-0 flex-1 overflow-y-auto py-6">
             <ul className="space-y-1">
               <li>
-                <Link viewTransition to="/#about" onClick={close} className={overlayLinkClass}>
+                <Link viewTransition to="/about#about" onClick={close} className={overlayLinkClass}>
                   About
                 </Link>
               </li>
               <li>
-                <a href="#reading" onClick={close} className={overlayLinkClass}>
-                  What I Read
-                </a>
+                <Link viewTransition to={cross.to} onClick={close} className={overlayLinkClass}>
+                  {cross.label}
+                </Link>
               </li>
               <li>
-                <a
-                  href={siteConfig.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={close}
-                  className={overlayLinkClass}
-                >
-                  GitHub <span aria-hidden="true">↗</span>
-                </a>
+                <Link viewTransition to="/#reading" onClick={close} className={overlayLinkClass}>
+                  What I Read
+                </Link>
               </li>
               <li>
                 <a href={`mailto:${siteConfig.social.email}`} onClick={close} className={overlayLinkClass}>
@@ -182,7 +198,7 @@ export default function ProjectsNav() {
               onClick={close}
               className="block rounded-sm text-[30px] font-bold leading-tight text-white transition-opacity duration-200 active:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
-              Résumé <span aria-hidden="true">↗</span>
+              Home
             </Link>
             <a
               href={siteConfig.social.calendar}

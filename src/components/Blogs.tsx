@@ -41,7 +41,7 @@ export default function Blogs() {
                     {blog.description}
                   </p>
                 </div>
-                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900" />
               </div>
             </a>
           ))}

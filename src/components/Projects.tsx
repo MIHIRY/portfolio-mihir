@@ -22,7 +22,7 @@ export default function Projects() {
             Selected work is written up on the{' '}
             <Link
               viewTransition
-              to="/projects"
+              to="/"
               className="rounded-sm font-bold underline underline-offset-4 transition-opacity duration-200 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               style={{ color: siteConfig.accentColor }}
             >
@@ -58,7 +58,7 @@ export default function Projects() {
                     {project.description}
                   </p>
                 </div>
-                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowOut className="ml-4 mt-0.5 shrink-0 text-gray-900" />
               </div>
               <div className="flex flex-wrap gap-2 mt-auto pt-4">
                 {project.skills.map((skill) => (

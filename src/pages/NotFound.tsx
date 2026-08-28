@@ -25,17 +25,19 @@ export default function NotFound() {
           <Link
             viewTransition
             to="/"
-            className="rounded-lg px-6 py-3 text-sm font-bold text-white transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="rounded-lg px-6 py-3 text-sm font-bold text-white transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
             style={{ backgroundColor: siteConfig.accentColor }}
           >
-            Back to home
+            View projects
           </Link>
+          {/* The work is the landing page now, so the second route out is the
+              résumé — otherwise both buttons went to the same place. */}
           <Link
             viewTransition
-            to="/projects"
-            className="rounded-lg border border-gray-300 px-6 py-3 text-sm font-bold text-gray-900 transition-colors duration-200 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+            to="/about"
+            className="rounded-lg border border-gray-300 px-6 py-3 text-sm font-bold text-gray-900 transition-[background-color,transform] duration-200 hover:bg-gray-50 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
           >
-            View projects
+            About me
           </Link>
         </div>
       </div>

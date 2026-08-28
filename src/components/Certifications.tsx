@@ -20,7 +20,9 @@ export default function Certifications() {
           {siteConfig.certifications.map((cert, index) => (
             <div
               key={index}
-              className="p-6 rounded-lg border border-gray-100 transition-colors duration-200 hover:border-gray-300"
+              /* No hover: these carry no link, and the border shift was the
+                 same one the Publications cards use to say they are clickable. */
+              className="p-6 rounded-lg border border-gray-100"
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900">

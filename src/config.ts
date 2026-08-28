@@ -34,6 +34,14 @@ export type FeaturedProject = {
   logos?: { src: string; name: string }[];
 };
 
+/** One card on the /skills page. */
+export type SkillGroup = {
+  name: string;
+  blurb: string;
+  /** `icon` is a path in /public; see `skillGroups` for how it changes rendering. */
+  items: { label: string; icon?: string }[];
+};
+
 export const siteConfig = {
   name: "Mihir Yanamandra",
   title: "Data Science Student at Stony Brook University",
@@ -48,14 +56,19 @@ export const siteConfig = {
    */
   pageMeta: {
     home: {
-      title: "Mihir Yanamandra — Data Engineer",
+      title: "Mihir Yanamandra: Data professional",
       description:
         "Data engineer building scalable platforms in Python, SQL, PySpark, Databricks, Snowflake and dbt. ETL/ELT pipelines and dimensional models over 30M+ record datasets.",
     },
     projects: {
-      title: "Projects — Mihir Yanamandra",
+      title: "Mihir Yanamandra's work!",
       description:
         "Data engineering projects: lakehouses on Iceberg and Microsoft Fabric, streaming telemetry with Kafka and Spark, dbt-modelled warehouses, and demand forecasting at scale.",
+    },
+    skills: {
+      title: "Skills — Mihir Yanamandra",
+      description:
+        "The toolkit behind the work: Python, SQL and PySpark through Airflow, dbt, Snowflake and Databricks, plus the computer-science and data-science fundamentals underneath them.",
     },
     notFound: {
       title: "Page not found — Mihir Yanamandra",
@@ -73,6 +86,7 @@ export const siteConfig = {
     calendar: "https://calendar.app.google/RQcvC6Kf1yH2BBE79",
     twitter: "",
     github: "https://github.com/MIHIRY",
+    kaggle: "https://www.kaggle.com/mihiryanamandra",
   },
   aboutMe: "Data Engineer with 3+ years building scalable data platforms in Python, SQL, PySpark, AWS, Databricks, Snowflake, and dbt. I design ETL/ELT pipelines and dimensional models that handle 30M+ record datasets. Track record: 40% performance improvements, 90% API cost reduction, and metrics layers that enable self-service analytics. Currently learning Microsoft Fabric for lakehouse solutions.",
   skills: [
@@ -124,6 +138,114 @@ export const siteConfig = {
     "Hadoop",
     "Power BI",
   ],
+  /**
+   * The /skills page. Each group is one card.
+   *
+   * An item may carry an `icon` (a path in /public). A card renders as a grid
+   * of logo tiles only when *every* item in it has one, and as text pills
+   * otherwise — so a group is never half logos and half labels. Fill in the
+   * icons for a group and it flips to tiles on its own, no layout change.
+   */
+  skillGroups: [
+    {
+      name: "Languages",
+      blurb: "The two languages the work is actually written in.",
+      items: [{ label: "Python", icon: "/logo-python.png" }, { label: "SQL", icon: "/logo-sql.png" }],
+    },
+    {
+      name: "Data Processing at Scale",
+      blurb: "Distributed compute for datasets that outgrow a single machine.",
+      items: [{ label: "Apache Spark", icon: "/logo-spark.png" }, { label: "Databricks", icon: "/logo-databricks.png" }, { label: "Hadoop", icon: "/logo-hadoop.png" }],
+    },
+    {
+      name: "Orchestration & Transformation",
+      blurb: "Scheduling, modelling and quality-gating the flow from raw data to marts.",
+      items: [
+        { label: "Airflow", icon: "/logo-airflow.png" },
+        { label: "dbt", icon: "/logo-dbt.png" },
+        { label: "Great Expectations", icon: "/logo-great-expectations.png" },
+      ],
+    },
+    {
+      name: "Warehouses & Lakehouses",
+      blurb: "Where modelled data lands and gets queried.",
+      items: [
+        { label: "Snowflake", icon: "/logo-snowflake.png" },
+        { label: "DuckDB", icon: "/logo-duckdb.png" },
+        { label: "Apache Iceberg", icon: "/logo-iceberg.png" },
+        { label: "Trino", icon: "/logo-trino.png" },
+        { label: "Microsoft Fabric", icon: "/logo-microsoft-fabric.png" },
+      ],
+    },
+    {
+      name: "Cloud & Deployment",
+      blurb: "Running and shipping platforms on managed infrastructure.",
+      items: [
+        { label: "AWS", icon: "/logo-aws.png" },
+        { label: "Azure", icon: "/logo-azure.png" },
+        { label: "Docker", icon: "/logo-docker.png" },
+      ],
+    },
+    {
+      name: "Databases",
+      blurb: "Transactional and document stores behind the applications.",
+      items: [{ label: "PostgreSQL", icon: "/logo-postgres.png" }, { label: "MySQL", icon: "/logo-mysql.png" }, { label: "MongoDB", icon: "/logo-mongo.png" }],
+    },
+    {
+      name: "Machine Learning",
+      blurb: "Training, tracking and evaluating models on production data.",
+      items: [
+        { label: "Scikit-learn" }, { label: "TensorFlow" }, { label: "PyTorch" },
+        { label: "XGBoost" }, { label: "MLflow" },
+      ],
+    },
+    {
+      name: "LLMs & Applied AI",
+      blurb: "Retrieval, fine-tuning and agent work on top of foundation models.",
+      items: [
+        { label: "RAG" }, { label: "LoRA" }, { label: "Transformers" },
+        { label: "Claude API" }, { label: "Groq API" }, { label: "AI Agents" },
+      ],
+    },
+    {
+      name: "Analytics & Visualisation",
+      blurb: "Turning modelled data into something a stakeholder can read.",
+      items: [
+        { label: "Power BI", icon: "/logo-power-bi.png" }, { label: "Tableau", icon: "/logo-tableau.png" }, { label: "Streamlit", icon: "/logo-streamlit.png" }, { label: "Excel", icon: "/logo-excel.png" },
+      ],
+    },
+    {
+      name: "Version Control & Collaboration",
+      blurb: "Managing code and working with others on it.",
+      items: [{ label: "Git", icon: "/logo-git.png" }, { label: "GitHub", icon: "/logo-github.png" }],
+    },
+    {
+      name: "Computer Science Concepts",
+      blurb: "The fundamentals underneath the tools.",
+      items: [
+        { label: "Data Structures & Algorithms" }, { label: "Object-Oriented Programming" },
+        { label: "Operating Systems" }, { label: "DBMS" }, { label: "Computer Networks" },
+        { label: "System Design" }, { label: "Distributed Systems" }, { label: "HPC / MPI" },
+      ],
+    },
+    {
+      name: "Data Science Concepts",
+      blurb: "The statistical and modelling ideas the work rests on.",
+      items: [
+        { label: "Statistics" }, { label: "Hypothesis Testing" }, { label: "Regression" },
+        { label: "Time Series" }, { label: "Dimensional Modelling" }, { label: "Feature Engineering" },
+        { label: "PCA" }, { label: "Data Mining" }, { label: "Forecasting" }, { label: "Risk Modeling" },
+      ],
+    },
+    {
+      name: "Personal Development",
+      blurb: "How I work with people, and keep getting better at it.",
+      items: [
+        { label: "Communication" }, { label: "Problem Solving" }, { label: "Ownership" },
+        { label: "Collaboration" }, { label: "Leadership" }, { label: "Time Management" },
+      ],
+    },
+  ] satisfies SkillGroup[],
   /**
    * Verifiable credentials for the /projects page card. Kept separate from
    * `certifications` below, which the home page renders with issuer/date/
@@ -236,9 +358,9 @@ export const siteConfig = {
       // Fills the slack that `compact` moves to the card's foot, and replaces
       // the text tags row that named the same three tools.
       logos: [
-        { src: "/duckdb.png", name: "DuckDB" },
-        { src: "/dbt.png", name: "dbt" },
-        { src: "/Airflow.png", name: "Airflow" },
+        { src: "/logo-duckdb.png", name: "DuckDB" },
+        { src: "/logo-dbt.png", name: "dbt" },
+        { src: "/logo-airflow.png", name: "Airflow" },
       ],
     },
     {

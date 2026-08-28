@@ -1,4 +1,9 @@
-# SPA fallback: /projects and any future route are client-side only, so every
+# The work used to live at /projects and is now the landing page. A real 301
+# here (rather than only the in-app <Navigate>) passes the old url's search
+# ranking on and saves shared links a round trip through the SPA shell.
+/projects   /   301
+
+# SPA fallback: /about and any future route are client-side only, so every other
 # path must serve index.html and let React Router resolve it. Without this a
-# direct hit or refresh on /projects returns 404.
+# direct hit or refresh on /about returns 404.
 /*    /index.html   200

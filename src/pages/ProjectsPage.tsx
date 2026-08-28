@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../config';
 import ProjectsNav from '../components/ProjectsNav';
 import ProjectCard, { ArrowOut, ProjectMedia } from '../components/ProjectCard';
@@ -41,32 +42,59 @@ function StatementCard({
   label,
   word,
   href,
+  to,
   external,
+  bold,
   className = '',
 }: {
   label: string;
   word: string;
-  href: string;
+  /** Outbound or mailto target. Pass this or `to`, never both. */
+  href?: string;
+  /** In-site route. Rendered as a Link so the route crossfade still runs. */
+  to?: string;
   external?: boolean;
+  /** Heavier, larger word. Opt-in so the existing cards keep their weight. */
+  bold?: boolean;
   className?: string;
 }) {
-  return (
-    <a
-      href={href}
-      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className={`group flex h-full flex-col justify-between rounded-3xl bg-surface p-6 transition-colors duration-300 hover:bg-surface-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-page sm:p-7 lg:p-8 ${className}`}
-    >
+  const cardClass = `group flex h-full flex-col justify-between rounded-3xl bg-surface p-6 transition-[background-color,transform] duration-200 hover:bg-surface-deep active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-page sm:p-7 lg:p-8 ${className}`;
+
+  const inner = (
+    <>
       <div className="flex items-start justify-between gap-4">
         <span className="max-w-[9rem] text-xs leading-snug text-ink-muted lg:text-[13px]">
           {label}
         </span>
-        <ArrowOut className="shrink-0 text-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowOut className="shrink-0 text-ink" />
       </div>
       {/* justify-between already pins the word to the bottom; this margin is
           only a floor, kept low so the word still fits at half height. */}
-      <span className="mt-6 text-3xl leading-none text-ink sm:text-4xl lg:text-[42px]">
+      <span
+        className={`mt-6 leading-none text-ink ${
+          bold
+            ? 'text-4xl font-bold sm:text-5xl lg:text-[52px]'
+            : 'text-3xl sm:text-4xl lg:text-[42px]'
+        }`}
+      >
         {word}
       </span>
+      {/* Same cue ProjectCard gives — this card leaves the site too. */}
+      {external && <span className="sr-only">(opens in a new tab)</span>}
+    </>
+  );
+
+  return to ? (
+    <Link viewTransition to={to} className={cardClass}>
+      {inner}
+    </Link>
+  ) : (
+    <a
+      href={href}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      className={cardClass}
+    >
+      {inner}
     </a>
   );
 }
@@ -148,9 +176,14 @@ function ReadingCard() {
       <h3 className="text-sm font-bold uppercase leading-snug tracking-[0.1em] text-ink lg:text-base">
         Books That Shape My Thinking
       </h3>
-      <p className="mt-2 text-[11px] leading-snug text-ink-muted lg:text-xs">
-        (Click a book to read my takeaways)
-      </p>
+      {/* Every book's `link` is still empty, so this would promise a click that
+          does nothing. Gated rather than deleted: it comes back by itself as soon
+          as one book has a link. */}
+      {siteConfig.reading.some((book) => book.link) && (
+        <p className="mt-2 text-[11px] leading-snug text-ink-muted lg:text-xs">
+          (Click a book to read my takeaways)
+        </p>
+      )}
       <ul className="mt-7 space-y-7">
         {siteConfig.reading.map((book) => {
           const body = (
@@ -168,7 +201,7 @@ function ReadingCard() {
                       {book.title}
                     </p>
                     {book.link && (
-                      <ArrowOut className="mt-0.5 shrink-0 text-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowOut className="mt-0.5 shrink-0 text-ink" />
                     )}
                   </div>
                   {book.author && (
@@ -197,7 +230,9 @@ function ReadingCard() {
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               ) : (
-                <div className="group">{body}</div>
+                /* No `group` — a book without a write-up should not answer the
+                   pointer with the cover zoom a linked one uses. */
+                <div>{body}</div>
               )}
             </li>
           );
@@ -233,6 +268,18 @@ export default function ProjectsPage() {
               <div className="pointer-events-none absolute right-6 top-6 lg:right-9 lg:top-9">
                 <EllipseBloom />
               </div>
+
+              {/* Absolutely placed, mirroring the bloom at top-right, so the h1 keeps
+                  its `justify-end` seat at the base of the card untouched. The h1's
+                  existing mt-24 already reserves this strip. */}
+              <p className="absolute left-7 top-7 max-w-[20rem] text-sm leading-[1.6] text-ink sm:left-9 sm:top-9 sm:text-base lg:left-10 lg:top-10 lg:text-lg">
+                <span className="block font-bold">welcome to my realm of</span>{' '}
+                <span className="block">
+                  <span className="font-bold">wild projects</span>{' '}
+                  <span className="font-light italic">and awesome</span>
+                </span>{' '}
+                <span className="block font-bold">creations</span>
+              </p>
               {/* Line breaks come from block spans, not <br>, so the accessible
                   name keeps its word spacing. */}
               <h1 className="relative mt-24 text-[26px] leading-[1.12] text-ink sm:mt-28 sm:text-4xl lg:text-[34px] xl:text-[46px]">
@@ -304,7 +351,12 @@ export default function ProjectsPage() {
                 href={siteConfig.social.linkedin}
                 external
               />
-              <div className="rounded-3xl bg-surface" />
+              <StatementCard
+                label="Notebooks and datasets"
+                word="Kaggle"
+                href={siteConfig.social.kaggle}
+                external
+              />
             </div>
           </Reveal>
 
@@ -389,7 +441,13 @@ export default function ProjectsPage() {
                         so the two share its height — any minimum here drags
                         space out of the row above. Below lg the rows are
                         independent and the floor just keeps the box visible. */}
-                    <div className="min-h-[120px] flex-1 rounded-3xl bg-surface lg:min-h-0" />
+                    <StatementCard
+                      label="What I work with"
+                      word="SKILLS"
+                      to="/skills"
+                      bold
+                      className="min-h-[120px] flex-1 lg:min-h-0"
+                    />
                   </div>
                 ) : (
                   <ProjectCard project={project} ratio="aspect-[16/10]" />

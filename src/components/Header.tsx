@@ -5,13 +5,14 @@ import { useNavPanel } from '../useNavPanel';
 import { useActiveSection } from '../useActiveSection';
 
 const navSections = [
-  { id: 'about', label: 'About', to: '/#about' },
-  { id: 'projects', label: 'Projects', to: '/projects' },
-  { id: 'experience', label: 'Experience', to: '/#experience' },
-  { id: 'education', label: 'Education', to: '/#education' },
-  { id: 'certifications', label: 'Certifications', to: '/#certifications' },
-  { id: 'publications', label: 'Publications', to: '/#publications' },
-  { id: 'blogs', label: 'Blogs', to: '/#blogs' },
+  { id: 'about', label: 'About', to: '/about#about' },
+  { id: 'projects', label: 'Projects', to: '/' },
+  { id: 'skills', label: 'Skills', to: '/skills' },
+  { id: 'experience', label: 'Experience', to: '/about#experience' },
+  { id: 'education', label: 'Education', to: '/about#education' },
+  { id: 'certifications', label: 'Certifications', to: '/about#certifications' },
+  { id: 'publications', label: 'Publications', to: '/about#publications' },
+  { id: 'blogs', label: 'Blogs', to: '/about#blogs' },
 ];
 
 const focusRing =
@@ -40,14 +41,17 @@ export default function Header() {
   });
 
   // On-page anchors fill the list; /projects is promoted to an action at the base.
-  const anchors = visibleSections.filter((section) => section.id !== 'projects');
+  const anchors = visibleSections.filter(
+    (section) => section.id !== 'projects' && section.id !== 'skills',
+  );
   const hasProjectsPage = visibleSections.some((section) => section.id === 'projects');
 
   const currentSection = useActiveSection(visibleSections.map((section) => section.id));
   // The homepage has a #projects section, but the nav's Projects link goes to a
   // separate route. Lighting it up would point at a page the reader is not on, so
   // the rule hides for the length of that section instead.
-  const activeId = currentSection === 'projects' ? null : currentSection;
+  const activeId =
+    currentSection === 'projects' || currentSection === 'skills' ? null : currentSection;
 
   // Where the rule sits. Held at its last position while hidden so it never
   // animates in from the left; `move` is false whenever it was invisible before.
@@ -81,7 +85,7 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-8 sm:px-12 md:px-16 lg:px-24 flex items-center justify-between h-16">
-        <Link viewTransition to="/" className={`flex items-center gap-3 text-gray-900 font-bold text-lg ${focusRing}`}>
+        <Link viewTransition to="/about" className={`flex items-center gap-3 text-gray-900 font-bold text-lg ${focusRing}`}>
           <img
             src={siteConfig.avatar}
             alt=""
@@ -201,7 +205,7 @@ export default function Header() {
             {hasProjectsPage && (
               <Link
                 viewTransition
-                to="/projects"
+                to="/"
                 onClick={close}
                 className="block rounded-sm text-[30px] font-bold leading-tight text-white transition-opacity duration-200 active:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >

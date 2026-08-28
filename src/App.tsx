@@ -1,9 +1,10 @@
 import { useEffect, type ReactNode } from 'react';
-import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
+import SkillsPage from './pages/SkillsPage';
 import NotFound from './pages/NotFound';
 
 /** Scrolls to the hash target on navigation, or to the top on a plain route change. */
@@ -54,15 +55,20 @@ export const router = createBrowserRouter([
   {
     element: <Root />,
     children: [
+      // The work is the landing page; the résumé sits a click behind it.
+      { path: '/', element: <ProjectsPage /> },
       {
-        path: '/',
+        path: '/about',
         element: (
           <SiteLayout>
             <Home />
           </SiteLayout>
         ),
       },
-      { path: '/projects', element: <ProjectsPage /> },
+      { path: '/skills', element: <SkillsPage /> },
+      // /projects was the public url for the work for a while. Anyone holding
+      // that link still lands on it rather than on the 404.
+      { path: '/projects', element: <Navigate to="/" replace /> },
       {
         // Was rendering Home, so a mistyped url silently looked valid.
         path: '*',

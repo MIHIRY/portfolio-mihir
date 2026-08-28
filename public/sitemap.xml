@@ -5,7 +5,11 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mihiryanamandra.com/projects</loc>
+    <loc>https://mihiryanamandra.com/about</loc>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mihiryanamandra.com/skills</loc>
+    <priority>0.7</priority>
   </url>
 </urlset>

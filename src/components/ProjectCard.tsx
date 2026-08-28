@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import type { FeaturedProject } from '../config';
 
-/** Thin north-east arrow, matching the affordance in the reference. */
+/**
+ * Thin north-east arrow, matching the affordance in the reference.
+ *
+ * The nudge lives here rather than at each call site: all six wrote out the same
+ * transition, and one of them drifting is how a shared gesture stops being one.
+ * `className` still carries the placement and colour, which do differ per card.
+ */
+const arrowNudge =
+  'transition-transform duration-300 ease-[var(--ease-out)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5';
+
 export function ArrowOut({ className = '' }: { className?: string }) {
   return (
     <svg
-      className={className}
+      className={`${arrowNudge} ${className}`}
       width="20"
       height="20"
       viewBox="0 0 24 24"
@@ -33,6 +42,8 @@ type MediaProps = {
   focus?: string;
   /** "object-cover" crops to fill; "object-contain" fits the whole image in. */
   fit?: string;
+  /** Backing tint. /skills runs on the dark set and overrides the sky default. */
+  plate?: string;
   className?: string;
 };
 
@@ -48,6 +59,7 @@ export function ProjectMedia({
   radius = 'rounded-2xl',
   focus = 'object-center',
   fit = 'object-cover',
+  plate = 'bg-plate',
   className = '',
 }: MediaProps) {
   // Same guard as Hero.tsx: a missing file falls back to the plate rather than
@@ -55,7 +67,7 @@ export function ProjectMedia({
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className={`${ratio} ${radius} ${className} relative overflow-hidden bg-plate`}>
+    <div className={`${ratio} ${radius} ${className} ${plate} relative overflow-hidden`}>
       {src && !failed ? (
         <img
           src={src}
@@ -63,11 +75,11 @@ export function ProjectMedia({
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className={`absolute inset-0 h-full w-full ${fit} ${focus} transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]`}
+          className={`absolute inset-0 h-full w-full ${fit} ${focus} transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]`}
         />
       ) : (
         <div
-          className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+          className="absolute inset-0 transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.02]"
           aria-hidden="true"
         >
           {/* Hairline cross-rule: reads as a plate awaiting artwork. */}
@@ -120,7 +132,7 @@ export default function ProjectCard({
         {name}
       </h3>
       {interactive && (
-        <ArrowOut className="mt-0.5 shrink-0 text-ink transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowOut className="mt-0.5 shrink-0 text-ink" />
       )}
     </div>
   );
@@ -135,8 +147,6 @@ export default function ProjectCard({
     </p>
   );
 
-  // Logos say the same thing as the tags, so a card carrying them drops the
-  // text row rather than naming each tool twice.
   // Logos say the same thing as the tags, so a card carrying them drops the
   // text row. A card with no link still shows its own tags when it has them;
   // "Coming soon" is only for one that has nothing to say yet.
@@ -232,8 +242,9 @@ export default function ProjectCard({
     );
   }
 
-  const surface =
-    'group flex h-full flex-col rounded-3xl bg-surface p-6 transition-colors duration-300 sm:p-7 lg:p-8';
+  // `group` lives on the link, not here: it drives the cover's hover zoom, and
+  // a card with nowhere to go should not answer the pointer like one that does.
+  const surface = 'flex h-full flex-col rounded-3xl bg-surface p-6 sm:p-7 lg:p-8';
 
   if (!interactive) {
     return <div className={`${surface} ${className}`}>{content}</div>;
@@ -244,7 +255,7 @@ export default function ProjectCard({
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${surface} ${className} hover:bg-surface-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-page`}
+      className={`group ${surface} ${className} transition-[background-color,transform] duration-200 hover:bg-surface-deep active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-page`}
     >
       {content}
       <span className="sr-only">(opens on GitHub in a new tab)</span>

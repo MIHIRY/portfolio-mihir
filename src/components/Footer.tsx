@@ -5,13 +5,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navSections = [
-    { id: 'about', label: 'About', to: '/#about', show: true },
-    { id: 'projects', label: 'Projects', to: '/projects', show: siteConfig.projects.length > 0 },
-    { id: 'experience', label: 'Experience', to: '/#experience', show: siteConfig.experience.length > 0 },
-    { id: 'education', label: 'Education', to: '/#education', show: siteConfig.education.length > 0 },
-    { id: 'certifications', label: 'Certifications', to: '/#certifications', show: siteConfig.certifications.length > 0 },
-    { id: 'publications', label: 'Publications', to: '/#publications', show: siteConfig.publications.length > 0 },
-    { id: 'blogs', label: 'Blogs', to: '/#blogs', show: siteConfig.blogs.length > 0 },
+    { id: 'about', label: 'About', to: '/about#about', show: true },
+    { id: 'projects', label: 'Projects', to: '/', show: siteConfig.projects.length > 0 },
+    { id: 'skills', label: 'Skills', to: '/skills', show: true },
+    { id: 'experience', label: 'Experience', to: '/about#experience', show: siteConfig.experience.length > 0 },
+    { id: 'education', label: 'Education', to: '/about#education', show: siteConfig.education.length > 0 },
+    { id: 'certifications', label: 'Certifications', to: '/about#certifications', show: siteConfig.certifications.length > 0 },
+    { id: 'publications', label: 'Publications', to: '/about#publications', show: siteConfig.publications.length > 0 },
+    { id: 'blogs', label: 'Blogs', to: '/about#blogs', show: siteConfig.blogs.length > 0 },
   ].filter((s) => s.show);
 
   return (
@@ -26,7 +27,7 @@ export default function Footer() {
             {siteConfig.social.email && (
               <a
                 href={`mailto:${siteConfig.social.email}`}
-                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                className="-m-2 rounded-sm p-2 text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 aria-label="Email"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -40,7 +41,7 @@ export default function Footer() {
                 href={siteConfig.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                className="-m-2 rounded-sm p-2 text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 aria-label="LinkedIn"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -55,7 +56,7 @@ export default function Footer() {
                 href={siteConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-sm text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                className="-m-2 rounded-sm p-2 text-gray-400 hover:text-[var(--accent-color)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 aria-label="GitHub"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -73,7 +74,7 @@ export default function Footer() {
                 <Link
                   viewTransition
                   to={section.to}
-                  className="rounded-sm text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                  className="rounded-sm text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   {section.label}
                 </Link>
